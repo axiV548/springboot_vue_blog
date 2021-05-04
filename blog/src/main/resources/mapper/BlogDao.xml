@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.axiv548.dao.BlogDao">
+
+<!--    查寻所有文章-->
+    <select id="getBlog" resultType="java.util.Map">
+        select blog_id, blog_title, blog_description, blog_first_img, blog_update_time, blog_views
+        from blogs
+        where blog_public = 1 and blog_release = 1
+        order by blog_update_time desc, blog_id desc
+        limit #{page}, #{pageSize}
+    </select>
+
+<!--    查询文章总数-->
+    <select id="getBlogCount" resultType="java.lang.Integer">
+        select COUNT(*)
+        from blogs
+        where blog_public = 1 and blog_release = 1
+    </select>
+
+<!--    根据ID查文章-->
+    <select id="getBlogById" parameterType="java.lang.Integer" resultType="java.util.Map">
+        select * from blogs where blog_id=#{id}
+    </select>
+
+<!--    查询5篇推荐文章-->
+    <select id="getBlogRecommend" resultType="java.util.Map">
+        select blog_id, blog_title from blogs where blog_recommend=1 order by blog_update_time desc,blog_id desc LIMIT 5
+    </select>
+
+
+<!--    管理员-->
+    <!--查寻所有文章-->
+    <select id="adminGetBlog" resultType="java.util.Map">
+        select blog_id, blog_title, blog_update_time, blog_recommend, blog_release
+        from blogs
+        order by blog_update_time desc,blog_id desc
+        limit #{page}, #{size}
+    </select>
+
+<!--    查询文章总数-->
+    <select id="getAdminBlogCount" resultType="java.lang.Integer">
+        select COUNT(*)
+        from blogs
+    </select>
+
+    <!--    根据ID查文章-->
+    <select id="adminGetBlogById" parameterType="java.lang.Integer" resultType="java.util.Map">
+        select * from blogs where blog_id=#{id}
+    </select>
+
+
+    <!--    新增文章-->
+    <insert id="saveBlog" parameterType="com.axiv548.entity.Blogs" useGeneratedKeys="true" keyProperty="blog_id">
+        INSERT INTO `blogs`(`blog_id`, `blog_title`, `blog_content`, `blog_description`, `blog_update_time`, `blog_views`, `blog_comment`, `blog_public`, `blog_release`, `blog_recommend`, `blog_first_img`, `user_id`)
+        VALUES (null, #{blog_title}, #{blog_content}, #{blog_description}, #{blog_update_time}, #{blog_views}, #{blog_comment}, #{blog_public}, #{blog_release}, #{blog_recommend}, #{blog_first_img}, #{user_id});
+    </insert>
+
+    <!--    删除文章-->
+    <delete id="deleteBlog" parameterType="java.lang.Integer">
+        delete from blogs where blog_id=#{id}
+    </delete>
+
+    <!--    修改文章-->
+    <update id="putBlog" parameterType="com.axiv548.entity.Blogs">
+        UPDATE `blogs`
+        SET `blog_title` = #{blog_title}, `blog_content` = #{blog_content}, `blog_description` = #{blog_description}, `blog_update_time` = #{blog_update_time}, `blog_views` = #{blog_views}, `blog_comment` = #{blog_comment}, `blog_public` = #{blog_public}, `blog_release` = #{blog_release}, `blog_recommend` = #{blog_recommend}, `blog_first_img` = #{blog_first_img}, `user_id` = #{user_id}
+        WHERE `blog_id` = #{blog_id};
+    </update>
+
+<!--    增加文章查看次数-->
+    <update id="addView" parameterType="java.lang.Integer">
+        UPDATE `blogs`
+        SET `blog_views` = `blog_views` + 1
+        WHERE `blog_id` = #{blog_id};
+    </update>
+
+    <!--    清空文章分类标签-->
+    <delete id="deleteBlogTag" parameterType="java.lang.Integer">
+        delete from blog_tag where blog_id=#{blog_id}
+    </delete>
+
+    <!--    绑定文章分类标签-->
+    <insert id="postBlogTag" parameterType="com.axiv548.entity.BlogTag">
+        INSERT INTO `blog_tag`(`blog_id`, `tag_id`) VALUES (#{blog_id}, #{tag_id});
+    </insert>
+
+
+</mapper>

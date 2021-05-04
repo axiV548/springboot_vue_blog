@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.axiv548.dao.SearchDao">
+
+<!--    首页搜索-->
+    <select id="getSearch" parameterType="java.util.Map" resultType="java.util.Map">
+        select blog_id, blog_title, blog_description, blog_first_img, blog_update_time, blog_views
+        from blogs
+        where (blog_public = 1 and blog_release = 1) and (blog_content like concat('%', #{kw}, '%') or blog_title like concat('%', #{kw}, '%'))
+        order by blog_update_time desc, blog_id desc
+        limit #{page}, #{size}
+    </select>
+
+<!--    搜索总数-->
+    <select id="getSearchCount" resultType="java.lang.Integer">
+        select COUNT(*)
+        from blogs
+        where (blog_public = 1 and blog_release = 1) and (blog_content like concat('%', #{kw}, '%') or blog_title like concat('%', #{kw}, '%'))
+    </select>
+
+</mapper>

@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head th:replace="__fragments :: head">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>404</title>
+</head>
+
+<body>
+
+<!--导航栏-->
+<nav th:replace="__fragments :: menu(1)" class="ui inverted grey attached segment index-navigation-mini"></nav>
+
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<div class="ui error message container"><h1 style="text-align: center">404 Not Found!</h1></div>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+
+
+
+
+
+<!--底栏-->
+<footer th:replace="__fragments :: footer" class="ui inverted grey vertical segment index-footer-big"></footer>
+
+</body>
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.2/dist/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.js"></script>
+
+<script>
+    $('.menu.toggle').click(function () {
+        $('.m-item').toggleClass('index-mobile');
+    });
+</script>
+</html>

@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>error</title>
+</head>
+<body>
+    <h1>ERROR</h1>
+    <div>
+        <div th:utext="'&lt;!--'" th:remove="tag"></div>
+        <div th:utext="'Failed Request URL :' + ${url}" th:remove="tag"></div>
+        <div th:utext="'Exception message' + ${exception.message}" th:remove="tag"></div>
+        <ui th:remove="tag">
+            <li th:each="st : ${exception.stackTrace}" th:remove="tag"><span th:utext="${st}" th:remove="tag"></span></li>
+        </ui>
+        <div th:utext="'--&gt;'" th:remove="tag"></div>
+    </div>
+</body>
+</html>

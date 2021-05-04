@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.axiv548.dao.TypeDao">
+
+    <!--    查询分类，并添加该分类对应文章总数-->
+    <select id="getType" resultType="java.util.Map">
+        select types.*, count(*) count
+        from blog_tag
+        join blogs on blog_tag.blog_id=blogs.blog_id
+        join types on blog_tag.tag_id=types.type_tag_id
+        group by blog_tag.tag_id
+        order by type_tag_level asc,COUNT(*) desc
+    </select>
+
+
+<!--    查询所有分类-->
+    <select id="getAllTypeTag" resultType="java.util.Map">
+        select type_tag_id, type_tag_name, type_parent_id, type_tag_level
+        from types
+    </select>
+
+<!--    分页查询分类-->
+    <select id="getAllTypeTagByPage" resultType="java.util.Map">
+        select type_tag_id, type_tag_name, type_parent_id, type_tag_level
+        from types
+        order by type_tag_level asc,type_tag_id desc
+        limit #{page}, #{size}
+    </select>
+
+<!--    查询分类总数-->
+    <select id="getTypeCount" resultType="java.lang.Integer">
+        select count(*)
+        from types
+    </select>
+
+    <!--    新增分类-->
+    <insert id="postType" parameterType="com.axiv548.entity.Types">
+        INSERT INTO `types`(`type_tag_name`, `type_parent_id`, `type_tag_level`) VALUES (#{type_tag_name}, #{type_parent_id}, #{type_tag_level});
+    </insert>
+
+<!--    删除分类-->
+    <delete id="deleteType" parameterType="java.lang.Integer">
+        delete from types where type_tag_id = #{id}
+    </delete>
+
+<!--    修改分类-->
+    <update id="putType" parameterType="com.axiv548.entity.Types">
+        UPDATE `types`
+        SET `type_tag_name` = #{type_tag_name}, `type_parent_id` = #{type_parent_id}, `type_tag_level` = #{type_tag_level}
+        WHERE `type_tag_id` = #{type_tag_id};
+    </update>
+
+
+    <!--    根据文章查询标签-->
+    <select id="getTagByBlogId" parameterType="java.lang.Integer" resultType="java.util.Map">
+        select types.type_tag_id, types.type_tag_name, types.type_tag_level
+        from blog_tag
+        join blogs on blog_tag.blog_id=blogs.blog_id
+        join types on blog_tag.tag_id=types.type_tag_id
+        where blog_tag.blog_id = #{id} and types.type_tag_level = 1
+    </select>
+
+<!--    根据分类标签查询文章-->
+    <select id="getBlogByTag" parameterType="java.lang.Integer" resultType="java.util.Map">
+        select blogs.blog_id, blogs.blog_title, blogs.blog_description, blogs.blog_first_img, blogs.blog_update_time, blogs.blog_views
+        from blog_tag
+        join blogs on blog_tag.blog_id=blogs.blog_id
+        join types on blog_tag.tag_id=types.type_tag_id
+        where types.type_tag_id = #{id}
+    </select>
+
+
+</mapper>

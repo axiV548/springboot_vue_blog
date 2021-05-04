@@ -1,0 +1,20 @@
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/blog_test?useUnicode=true&characterEncoding=utf-8&serverTimezone=UTC
+    username: root
+    password: '123456'
+
+server:
+  port: 8081
+mybatis:
+  mapper-locations: classpath:mapper/*.xml
+
+img.dir: C:/java/springboot_vue/img
+
+logging:
+  level:
+    root: info
+    com.axiv548: debug
+  file:
+    path: log

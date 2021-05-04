@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.axiv548.dao.CommentDao">
+
+    <!--    查询文章评论-->
+    <select id="getCommentByBlogId" parameterType="java.lang.Integer" resultType="java.util.Map">
+        select comment_id, comment_admin, comment_nickname, comment_content, comment_email, comment_create_time
+        from blog_comment
+        where blog_comment.blog_id = #{id}
+        order by comment_create_time desc,comment_id desc
+    </select>
+
+<!--    添加文章评论-->
+    <insert id="postComment" parameterType="com.axiv548.entity.BlogComment" useGeneratedKeys="true" keyProperty="comment_id">
+        INSERT INTO `blog_comment`(`comment_admin`, `comment_content`, `comment_email`, `comment_nickname`, `comment_create_time`, `blog_id`)
+        VALUES (#{comment_admin}, #{comment_content}, #{comment_email}, #{comment_nickname}, #{comment_create_time}, #{blog_id});
+    </insert>
+
+<!--    修改评论-->
+    <update id="putComment" parameterType="com.axiv548.entity.BlogComment">
+      UPDATE `blog_comment`
+      SET `comment_admin` = #{comment_admin}, `comment_content` = #{comment_content}, `comment_email` = #{comment_email}, `comment_nickname` = #{comment_nickname}, `comment_create_time` = #{comment_create_time}, `blog_id` = #{blog_id}
+      WHERE `comment_id` = #{comment_id};
+    </update>
+
+
+<!--    删除评论-->
+    <delete id="deleteComment" parameterType="java.lang.Integer">
+        delete from blog_comment where comment_id=#{id}
+    </delete>
+
+
+</mapper>
