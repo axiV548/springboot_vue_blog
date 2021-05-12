@@ -95,11 +95,11 @@
       methods: {
         getBlogs(index) {
           this.page = index || this.page
-          // console.log(this.page)
+
           this.$http.get(this.$base_url + "/blogs/page/" + this.page).then((res)=>{
             this.blogs = res.data.data;
             this.size = res.data.other;
-            // console.log("blogs", this.blogs);
+
           });
         },
 

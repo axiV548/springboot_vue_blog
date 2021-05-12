@@ -40,6 +40,20 @@
             <version>2.6</version>
         </dependency>
 
+<!--        图片缩放-->
+        <dependency>
+            <groupId>net.coobird</groupId>
+            <artifactId>thumbnailator</artifactId>
+            <version>0.4.14</version>
+
+        </dependency>
+<!--        读取照片exif信息-->
+        <dependency>
+            <groupId>com.drewnoakes</groupId>
+            <artifactId>metadata-extractor</artifactId>
+            <version>2.15.0</version>
+        </dependency>
+
 
         <dependency>
             <groupId>mysql</groupId>

@@ -30,7 +30,7 @@ public class UserController {
 
         String md5 = MD5Util.code(name_password.get("user_password"));
         name_password.put("user_password", md5);
-//        System.out.println(name_password);
+
         Map<String, Object> map = userService.login(name_password);
 
         AjaxResponse ajaxResponse;

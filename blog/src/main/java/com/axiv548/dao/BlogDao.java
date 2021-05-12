@@ -15,7 +15,7 @@ import java.util.Map;
 @Mapper
 public interface BlogDao {
 
-    List<Map<String, Object>> getBlog(Integer page,Integer pageSize);
+    List<Map<String, Object>> getBlog(Integer page, Integer pageSize);
 
     Map<String, Object> getBlogById(Integer id);
 

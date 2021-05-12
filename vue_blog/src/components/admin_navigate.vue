@@ -4,7 +4,8 @@
       <div class="ui inverted grey secondary stackable menu">
         <h2 class="ui teal header item">管理</h2>
         <a href="/admin" class="nav-item item index-mobile" ><i class="home icon"></i>文章</a>
-        <a href="/admin/types" class="nav-item item index-mobile" ><i class="th large icon"></i>分类</a>
+        <a href="/admin/types" class="nav-item item index-mobile" ><i class="th icon"></i>分类</a>
+        <a href="/admin/albums" class="m-item item index-mobile"><i class="camera retro icon"></i>相册</a>
         <div class="right nav-item index-mobile menu">
           <div class="ui dropdown item">
             <div class="text">

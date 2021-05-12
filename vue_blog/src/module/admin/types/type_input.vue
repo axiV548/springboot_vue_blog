@@ -56,7 +56,7 @@
 </template>
 
 <script>
-    import admin_navigate from "../../components/admin_navigate";
+    import admin_navigate from "../../../components/admin_navigate";
     export default {
       name: "type_input",
       components:{
@@ -75,7 +75,7 @@
         getType() {
           this.$http.get(this.$base_url + "/types/admin").then((res)=>{
             this.types = res.data.data;
-            // console.log(this.types);
+
           });
         },
 
@@ -92,9 +92,13 @@
               this.tag.type_parent_id = 0;
               this.tag.type_tag_level = 0;
             };
-            // console.log(this.tag);
+
             this.$http.put(this.$base_url + "/types/admin", this.tag).then((res)=>{
-              // console.log(res.data);
+              if (res.data.code==200) {
+                this.goToPath();
+
+              }
+
             });
 
           } else {
@@ -107,12 +111,14 @@
               this.tag.type_parent_id = 0;
               this.tag.type_tag_level = 0;
             };
-            // console.log(this.tag);
+
             this.$http.post(this.$base_url + "/types/admin", this.tag).then((res)=>{
-            // console.log(res.data);
+              if (res.data.code==200) {
+                this.goToPath();
+
+              }
             });
           };
-          this.goToPath();
 
         },
 
@@ -129,7 +135,6 @@
         },
 
         reload() {
-          this.$router.replace('/admin/types/input')
           this.$router.go(0)
         },
 

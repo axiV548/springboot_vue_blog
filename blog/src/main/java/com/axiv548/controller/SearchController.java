@@ -24,7 +24,6 @@ public class SearchController {
     public AjaxResponse getBlog(@PathVariable String kw,
                                 @PathVariable Integer page) {
         Integer pageSize = 8;
-//        System.out.println("kw:" + kw);
         Integer blogSize = searchService.getSearchCount(kw);
         String size = blogSize.toString();
 

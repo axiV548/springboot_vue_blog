@@ -57,7 +57,7 @@
 </template>
 
 <script>
-    import admin_navigate from "../../components/admin_navigate";
+    import admin_navigate from "../../../components/admin_navigate";
 
     export default {
       name: "admin_types",
@@ -75,11 +75,11 @@
 
         getTypes(index) {
           this.page = index || this.page
-          console.log(this.page)
+
           this.$http.get(this.$base_url + "/types/admin/page/" + this.page).then((res)=>{
             this.types = res.data.data;
             this.size = res.data.other;
-            // console.log("types", this.types);
+
           });
         },
         nextPage() {
@@ -96,8 +96,10 @@
         delType(delId) {
           if (confirm('确定要删除吗?') == true) {
             this.$http.delete(this.$base_url + "/types/admin/" + delId).then((res) => {
+              if (res.data.code==200) {
+                this.$router.go(0)
+              }
             });
-            this.$router.go(0);
           }
         },
       },

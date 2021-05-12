@@ -99,12 +99,12 @@ public class BlogController {
     @ResponseBody
     public AjaxResponse saveBlog(Blogs blogs, MultipartFile first_img) throws IOException {
 //        保存首页图片
-        String newFileNmae = UUID.randomUUID().toString() + "." + FilenameUtils.getExtension(first_img.getOriginalFilename());
+        String newFileName = UUID.randomUUID().toString() + "." + FilenameUtils.getExtension(first_img.getOriginalFilename());
         String imgPath = realPath + "/" + "firstImg";
-        first_img.transferTo(new File(imgPath, newFileNmae));
-        blogs.setBlog_first_img(newFileNmae);
+        first_img.transferTo(new File(imgPath, newFileName));
+        blogs.setBlog_first_img(newFileName);
         blogService.saveBlog(blogs);
-        AjaxResponse ajaxResponse = new AjaxResponse().success(200, "添加成功");
+        AjaxResponse ajaxResponse = new AjaxResponse().success("添加成功");
         return ajaxResponse;
     }
 
@@ -145,7 +145,7 @@ public class BlogController {
         }
 
         blogService.putBlog(blogs);
-        AjaxResponse ajaxResponse = new AjaxResponse().success(200, "添加成功");
+        AjaxResponse ajaxResponse = new AjaxResponse().success("修改成功");
         return ajaxResponse;
 
     }
@@ -159,7 +159,7 @@ public class BlogController {
         String imgPath = realPath + "/" + "contentImg";
         content_img.transferTo(new File(imgPath, newFileName));
 
-        AjaxResponse ajaxResponse = new AjaxResponse().success(200, "添加成功", newFileName);
+        AjaxResponse ajaxResponse = new AjaxResponse().success("添加成功", newFileName);
         return ajaxResponse;
     }
 
@@ -167,15 +167,12 @@ public class BlogController {
     public AjaxResponse deleteImg(@PathVariable("imgName") String imgName) {
 
         String imgPath = realPath + "/" + "contentImg";
-        System.out.println(imgPath);
-        System.out.println(imgName);
-
         if (imgName != null) {
             File delFile = new File(imgPath, imgName);
             delFile.delete();
         }
 
-        AjaxResponse ajaxResponse = new AjaxResponse().success(200, "删除成功");
+        AjaxResponse ajaxResponse = new AjaxResponse().success("删除成功");
         return ajaxResponse;
 
     }

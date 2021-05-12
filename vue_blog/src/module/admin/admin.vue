@@ -109,7 +109,6 @@
         this.$http.get(this.$base_url + "/blogs/admin/page/" + this.page).then((res)=>{
           this.blogs = res.data.data;
           this.size = res.data.other;
-          // console.log("blogs", this.size);
         });
       },
 
@@ -125,9 +124,11 @@
       delBlog(delId) {
         if(confirm('确定要删除吗?')==true) {
             this.$http.delete(this.$base_url + "/blogs/admin/" + delId).then((res)=>{
+              if (res.data.code==200) {
+                this.$router.go(0)
+              }
           });
         };
-        this.$router.go(0);
       },
 
     },

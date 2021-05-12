@@ -138,13 +138,13 @@
           this.$http.get(this.$base_url + "/blogs/" + this.$route.query.id).then(res=>{
             this.blog = res.data.data
             this.findComment();
-            // console.log(res.data.data)
+
           })
         },
         findComment() {
           this.$http.get(this.$base_url + "/comment/" + this.$route.query.id).then(res=>{
             this.blog_comment = res.data.data
-            // console.log(this.$base_url + "/comment/" + this.$route.query.id)
+
           })
         },
 
@@ -157,7 +157,7 @@
             }
             this.$http.post(this.$base_url + "/comment/", this.comment).then(res=>{
               this.$router.go(0);
-              // console.log(res.data.data)
+
             })
           } else {
             confirm('内容不能为空！！！')
@@ -165,7 +165,7 @@
         },
       },
       created() {
-        // console.log("dwdw", this.$route.query.id);
+
         this.findBlog();
       }
     }

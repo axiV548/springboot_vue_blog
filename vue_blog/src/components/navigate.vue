@@ -5,7 +5,8 @@
         <div class="ui secondary stackable menu">
           <h2 class="ui blue header item">DD</h2>
           <a href="/" class="m-item item index-mobile"><i class="home icon"></i>首页</a>
-          <a href="/types" class="m-item item index-mobile"><i class="th large icon"></i>分类</a>
+          <a href="/types" class="m-item item index-mobile"><i class="th icon"></i>分类</a>
+          <a href="/albums" class="m-item item index-mobile"><i class="camera retro icon"></i>相册</a>
           <a href="/about" class="m-item item index-mobile" ><i class="info icon"></i>关于</a>
           <div class="m-item right item index-mobile">
 

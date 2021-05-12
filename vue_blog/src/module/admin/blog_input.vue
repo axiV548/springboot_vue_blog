@@ -160,7 +160,11 @@
             url: this.$base_url + "/blogs/admin",
             data: formData,
           }).then((res)=>{
+            if (res.data.code == 200) {
+              this.goToPath();
+            }
           });
+
         },
 
         putBlog(release) {
@@ -180,12 +184,14 @@
             url: this.$base_url + "/blogs/admin/" + this.$route.query.id,
             data: formData,
           }).then((res)=>{
-            console.log(res.data);
+            if (res.data.code == 200) {
+              this.goToPath();
+            }
           });
         },
 
         addImg(pos, file) {
-          console.log(file)
+
           let formData=new FormData();     //新建一个表单数据,用于提交文件
           formData.append("content_img", file);     //添加文件,参数分别是表单参数的名字和值.
           this.$http({
@@ -193,7 +199,7 @@
             url: this.$base_url + "/blogs/admin/img",
             data: formData,
           }).then((res)=>{
-            console.log(res.data);
+
             this.img_name = res.data.other;
             let img_url = this.service_url + '/contentImg/' + this.img_name;
             this.$refs.content_img.$img2Url(pos, img_url);     //将原来的图片url替换成data.url,注意$img2Url是自带的函数.
@@ -202,13 +208,10 @@
         },
 
         delImg(pos) {
-          console.log("pos", pos)
           pos=pos[0];     //首先获取到图片的原来的url
-          this.$http.delete("blogs/admin/img/" + this.img_name).then((res) => {});
+          this.$http.delete("blogs/admin/img/" + this.img_name).then((res) => {
 
-          // console.log(this.imgs)
-          console.log("this.imgs",this.imgs)
-
+          });
           delete this.imgs[pos];     //删除之前记录的图像字典中的数据
 
         },
@@ -218,10 +221,8 @@
             && this.blog.blog_content) {
             if (this.$route.query.id) {
               this.putBlog(release);
-              this.goToPath();
             } else {
               this.saveBlog(release);
-              this.goToPath();
             };
           } else {
             confirm('不能为空！！！')
@@ -229,7 +230,6 @@
         },
 
         newType() {
-          // console.log(this.tags);
           this.tags = []
 
         },
@@ -263,39 +263,5 @@
 </script>
 
 <style>
-  .input_title{
-    width: 100%;
-    margin-bottom: 10px;
-  }
-  .input_tag{
-    display: flex;
-    justify-content:space-between;
-    align-items:center;
-    margin-bottom: 10px;
-  }
-  .tag_right{
-    width: 500px;
-  }
-  .home_picture{
-    width: 100%;
-    margin-bottom: 10px;
-  }
-  .option{
-    display: flex;
-    flex-direction: row;
-  }
-  .gap{
-    margin-right: 10px;
-  }
-  .input_describe{
-    width: 100%;
-    height: 150px;
-    margin-bottom: 10px;
-    border-radius: 3px;
-    border: none;
-    padding: 10px 15px;
-  }
-  .input_describe:focus{
-    outline: none;
-  }
+
 </style>

@@ -32,9 +32,7 @@ public class CommentServiceImpl implements CommentService {
     @Override
     public void postComment(BlogComment blogComment) {
         blogComment.setComment_create_time(LocalDateTime.now());
-//        System.out.println(blogComment);
         commentDao.postComment(blogComment);
-        System.out.println(blogComment.getComment_id());
     }
 
     @Override

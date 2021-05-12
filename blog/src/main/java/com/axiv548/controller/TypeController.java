@@ -63,7 +63,6 @@ public class TypeController {
 
     @RequestMapping(value = "/admin", method = RequestMethod.POST)
     public AjaxResponse postType(@RequestBody Types types) {
-        System.out.println(types);
         typeService.postType(types);
         AjaxResponse ajaxResponse = new AjaxResponse().success(200, "添加成功");
         return ajaxResponse;

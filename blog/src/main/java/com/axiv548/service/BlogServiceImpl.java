@@ -86,7 +86,6 @@ public class BlogServiceImpl implements BlogService{
             BlogTag blogTag = new BlogTag();
             blogTag.setBlog_id(blogs.getBlog_id());
             blogTag.setTag_id(tag_id);
-//            System.out.println(blogTag);
             blogDao.postBlogTag(blogTag);
         }
     }
@@ -109,7 +108,6 @@ public class BlogServiceImpl implements BlogService{
             BlogTag blogTag = new BlogTag();
             blogTag.setBlog_id(blogs.getBlog_id());
             blogTag.setTag_id(tag_id);
-//            System.out.println(blogTag);
             blogDao.postBlogTag(blogTag);
         }
     }

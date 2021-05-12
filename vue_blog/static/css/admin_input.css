@@ -1,0 +1,48 @@
+/*blogInputCSS*/
+.input_title{
+  width: 100%;
+  margin-bottom: 10px;
+}
+.input_tag{
+  display: flex;
+  justify-content:space-between;
+  align-items:center;
+  margin-bottom: 10px;
+}
+.tag_right{
+  width: 500px;
+}
+.home_picture{
+  width: 100%;
+  margin-bottom: 10px;
+}
+.option{
+  display: flex;
+  flex-direction: row;
+}
+.gap{
+  margin-right: 10px;
+}
+.input_describe{
+  width: 100%;
+  height: 150px;
+  margin-bottom: 10px;
+  border-radius: 3px;
+  border: none;
+  padding: 10px 15px;
+}
+.input_describe:focus{
+  outline: none;
+}
+
+/*albumsInput*/
+.albumsUl {
+  list-style:none;
+  display: flex;/*必须，flex声明*/
+  flex-wrap: wrap;/*必须，指定可以换行*/
+  width: 100%;/*必须，一定要固定宽度，100%都不行*/
+  margin:auto;/*非必须，为了在中间好看*/
+
+}
+/*2. 项目的声明*/
+

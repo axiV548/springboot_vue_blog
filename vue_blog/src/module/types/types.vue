@@ -99,7 +99,6 @@
         getTypes() {
           this.$http.get(this.$base_url + "/types").then((res)=>{
             this.types = res.data.data;
-            // console.log(this.types)
           });
         },
         // 根据分类查询文章
@@ -107,7 +106,7 @@
           // console.log(this.tag_blog_id);
           this.$http.get(this.$base_url + "/types/tags/" + this.tag_blog_id).then((res)=>{
           this.blogs = res.data.data;
-          // console.log(this.blogs)
+
           });
         },
         //首页分类更多跳转
